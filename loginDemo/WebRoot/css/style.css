@@ -1,0 +1,138 @@
+/* css reset */
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Courier New";
+}
+/* 主面板 */
+#container {
+	width: 80%;
+	margin: 0 auto;
+	border: 1px solid #DDD;
+	height: 1000px;
+}
+/* banner */
+#header {
+	width: 100%;
+	height: 150px;
+	background-color: #01BF9D;
+	font-size: 50px;
+	line-height: 50px;
+	/*vertical-align: bottom;*/
+}
+
+#header .title {
+	background-color: transparent;
+	float: left bottom;
+}
+/* 导航 */
+#nav li {
+	display: inline;
+	float: left;
+	width: 20%;
+}
+
+#nav li a {
+	display: block;
+	/*width: 150px;*/
+	height: 30px;
+	line-height: 30px;
+	font-size: 15px;
+	text-align: center;
+	text-decoration: none;
+	border: 1px solid #EEE;
+	/*border-width:0px 1px 1px 1px;*/
+	color: black;
+}
+/*鼠标高亮*/
+#nav li a:hover {
+	border: 0px;
+	background-color: #01BF9D;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	color: white;
+	/*height:200px;*/
+	font-weight: bold;
+}
+
+#login,#individuationSettings {
+	background-color: #01BF9D;
+	text-align: center;
+	margin: 130px auto;
+	border: 1px solid #AAA;
+	height: 250px;
+	width: 400px
+}
+
+#login form table,#individuationSettings form table {
+	margin: 45px auto;
+	vertical-align: center;
+}
+
+hr {
+	color: #EEE;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+
+p.title {
+	font-weight: bold;
+	padding: 2px 5px;
+	background-color: #01A187;
+}
+
+input[type="text"],input[type="password"] {
+	/*background-color:#01BF9D;*/
+	background: transparent;
+	border-width: 0px;
+	border-bottom: 1px solid black;
+	width: 100%;
+}
+
+input[type="text"]:focus,input[type="password"]:focus {
+	border-bottom-color: red;
+}
+
+.button {
+	border-width: 0px;
+	/*background-color:transparent;*/
+	background-color: #01A187;
+	/*border:1px solid grey;*/
+	cursor: pointer;
+	padding: 8px 15px;
+	border-radius: 3px;
+}
+
+.button:hover {
+	/*background-color:grey*/
+	/*border:1px solid grey;*/
+	color: white;
+}
+
+label {
+	cursor: pointer;
+}
+
+.required {
+	color: red;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.select {
+	background: transparent;
+	border: 0px;
+	border-bottom: 1px solid black;
+	width: 100%;
+}
+
+.tipMessage {
+	color: red;
+	font-size: 13px;
+}
