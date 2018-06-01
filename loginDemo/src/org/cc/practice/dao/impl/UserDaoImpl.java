@@ -4,86 +4,54 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
+import org.cc.init.mysql.DataSourceBuilder;
 import org.cc.practice.dao.UserDao;
 import org.cc.practice.entity.User;
-import org.cc.practice.util.DbUtil;
 
-public class UserDaoImpl implements UserDao {
 
-	@Override
-	public User login(User user) {
+import com.tonetime.commons.database.helper.DbHelper;
+import com.tonetime.commons.database.helper.JdbcCallback;
+
+public class UserDaoImpl{
+
+
+	
 		
-		String sql="SELECT id,username,password FROM user_login WHERE username=? and password=?";
-		
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		User u=null;
-		
-		try {
-			conn=DbUtil.getConnection();
-			pstmt=conn.prepareStatement(sql);
+	public  static List checkLogin(final String un,final String pw) throws Exception{
 			
-			pstmt.setString(1,user.getUsername());
-			pstmt.setString(2,user.getPasswd());
+			List<Map<String,Object>> list = (List<Map<String, Object>>) DbHelper.execute(DataSourceBuilder.getInstance().getDataSource(), new JdbcCallback() {
+				
+						@Override
+						public Object doInJdbc(Connection arg0) throws SQLException, Exception {
+							
+							final String sqlCom="select * from user_login where username='"+un+"' and password='"+pw+"' ";
+							return DbHelper.queryForList(arg0, sqlCom);
+						}
+					});
 			
-			rs=pstmt.executeQuery();
+			return list;
 			
-			if(rs.next()){
-				u=new User();
-				u.setId(rs.getString("id"));
-				u.setUsername(rs.getString("username"));
-				u.setPasswd(rs.getString("password"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally{
-			DbUtil.close(rs);
-			DbUtil.close(pstmt);
-			DbUtil.close(conn);
-		}
-		
-		return u;
 	}
+	
 
-	@Override
-	public User findUserById(String id) {
-		
-		String sql="SELECT id,username,password FROM user_login WHERE id=?";
-		
-		Connection conn=null;
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		User u=null;
-		
-		try {
-			conn=DbUtil.getConnection();
-			pstmt=conn.prepareStatement(sql);
+	
+	public  static List outputData() throws Exception{
 			
-			pstmt.setString(1,id);
+			List<Map<String,Object>> list = (List<Map<String, Object>>) DbHelper.execute(DataSourceBuilder.getInstance().getSlaveSource(), new JdbcCallback() {
+				
+						@Override
+						public Object doInJdbc(Connection arg0) throws SQLException, Exception {
+							
+							final String sqlCom="select * from iov_track_0 limit 20";
+							return DbHelper.queryForList(arg0, sqlCom);
+						}
+					});
 			
-			rs=pstmt.executeQuery();
+			return list;
 			
-			if(rs.next()){
-				u=new User();
-				u.setId(rs.getString("id"));
-				u.setUsername(rs.getString("username"));
-				u.setPasswd(rs.getString("password"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally{
-			DbUtil.close(rs);
-			DbUtil.close(pstmt);
-			DbUtil.close(conn);
-		}
-		
-		return null;
 	}
 
 }
