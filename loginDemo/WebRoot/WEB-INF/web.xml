@@ -23,8 +23,20 @@
 
   <servlet-mapping>
     <servlet-name>data</servlet-name>
-    <url-pattern>/getModelData</url-pattern>
+    <url-pattern>/getData</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>getMap</servlet-name>
+    <servlet-class>org.cc.practice.data.setMap</servlet-class>
+  </servlet>
+  
+
+  <servlet-mapping>
+    <servlet-name>getMap</servlet-name>
+    <url-pattern>/getMap</url-pattern>
+  </servlet-mapping>
+ 
  
   
   <filter>
@@ -37,6 +49,6 @@
   </filter-mapping>
   
   <session-config>
-    <session-timeout>10</session-timeout>
+    <session-timeout>60</session-timeout>
   </session-config>
 </web-app>

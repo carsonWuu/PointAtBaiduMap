@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 	}
 	
 	private void process(HttpServletRequest req, HttpServletResponse resp) throws Exception{
-
+		System.out.println("收到登录信息");
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=utf-8");
 		
@@ -71,10 +71,12 @@ public class LoginServlet extends HttpServlet {
 		List<Map<String,Object>> list=userDaoImpl.checkLogin(username, passwd);
 		
 		if(list.size()==0){//用户名密码错误。
+			System.out.println("用户名或密码错误");
 			req.setAttribute("loginError","用户名或密码错误");
 			req.getRequestDispatcher("login.jsp").forward(req,resp);
 			return;
 		}else{//登录成功进行跳转至地图展示页
+			System.out.println("登录成功");
 			User user=new User();
 			user.setUsername(username);
 			user.setPasswd(passwd);

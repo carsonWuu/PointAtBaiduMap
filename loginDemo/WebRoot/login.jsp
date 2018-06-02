@@ -16,9 +16,9 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
-	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css"> 
+	
 <title>登录</title>
 <style>
 
@@ -26,6 +26,9 @@
 
 
 <style>
+		.row{
+			border:1px solid #ddd;//h3字体下边框
+		}
   		.input-group{
 			margin:10px 0px;//输入框上下外边距为10px,左右为0px
 		}
@@ -52,13 +55,15 @@
   </style>
   </head>
   <body>
-    <div class="row" style="margin-top:10px;">
-		<div class="col-md-offset-4" style="border-right:1px solid #ddd;">
-			<div class="well col-md-4">
+  <div class="container-fluid">
+    <div class="row" style="margin:0px;">
+		<div class="col-md-offset-4">
+			<div style="text-align:center">
 				<h3 style="text-align:center;">用户登录</h3>
+			</div>
 
 		
-			
+			<div>
 			<form action="loginServlet" method="post">
 				<table>
 					<thead>
@@ -104,4 +109,8 @@
 
 
 </body>
+<script src="./javascript/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./javascript/jquery-3.2.1.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>

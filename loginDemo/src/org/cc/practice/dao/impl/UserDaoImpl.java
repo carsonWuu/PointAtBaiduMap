@@ -14,6 +14,7 @@ import org.cc.practice.entity.User;
 
 import com.tonetime.commons.database.helper.DbHelper;
 import com.tonetime.commons.database.helper.JdbcCallback;
+import org.cc.practice.data.mapPosition;
 
 public class UserDaoImpl{
 
@@ -38,14 +39,14 @@ public class UserDaoImpl{
 	
 
 	
-	public  static List outputData() throws Exception{
-			
+	public  static List outputData(mapPosition map) throws Exception{
+			System.out.println(map);
 			List<Map<String,Object>> list = (List<Map<String, Object>>) DbHelper.execute(DataSourceBuilder.getInstance().getSlaveSource(), new JdbcCallback() {
 				
 						@Override
 						public Object doInJdbc(Connection arg0) throws SQLException, Exception {
 							
-							final String sqlCom="select * from iov_track_0 limit 20";
+							final String sqlCom="select * from iov_track_0 limit 20,400";
 							return DbHelper.queryForList(arg0, sqlCom);
 						}
 					});
@@ -53,5 +54,22 @@ public class UserDaoImpl{
 			return list;
 			
 	}
+	
+	public  static List initOutputData() throws Exception{
+		System.out.println("≥ı ºªØ≤È—Ø£°");
+		List<Map<String,Object>> list = (List<Map<String, Object>>) DbHelper.execute(DataSourceBuilder.getInstance().getSlaveSource(), new JdbcCallback() {
+			
+					@Override
+					public Object doInJdbc(Connection arg0) throws SQLException, Exception {
+						
+						final String sqlCom="select * from iov_track_0 limit 20";
+						return DbHelper.queryForList(arg0, sqlCom);
+					}
+				});
+		
+		return list;
+		
+}
+	
 
 }
