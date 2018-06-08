@@ -56,21 +56,33 @@ public class redis{
 	    	}
 			
 	    	double lng_a=Double.parseDouble(lng),lat_a=Double.parseDouble(lat);
-			if(checkData(m,lat_a,lng_a))list.add(map);
+			if(checkData(m,lng_a,lat_a))list.add(map);
 		}
 		return list; 
 	}
 	public static boolean checkData(mapPosition m,double a,double b){
 		//center Point
 		double lng_a=m.index_x,lat_a=m.index_y;//经纬度
-		int zoom=m.zoom;//level
-		int num=50;
-		double miles=num*level[zoom];
+		
+		double ld_lng=m.bounds_leftDown_x,ld_lat=m.bounds_leftDown_y;
+		double rt_lng=m.bounds_rightTop_x,rt_lat=m.bounds_rightTop_y;
+		
+		if((a>ld_lng)&&(a<rt_lng)&&(b>ld_lat)&&(b<rt_lat))return true;
+//		int zoom=m.zoom;//level
+//		int num=6;
+//		double miles=num*level[zoom-3];
 		
 		//checked Point
 		
         
-		if(getDistanceFromTwoPoints(lat_a, lng_a, a, b)<miles)return true;
+//		if(getDistanceFromTwoPoints(lat_a, lng_a, a, b)<miles)return true;//距离判断
+		
+		/*屏幕内对角线经纬度直接进行比较。
+		 * 
+		 */
+		
+		
+		
 		return false;
 	}
 	
@@ -82,8 +94,9 @@ public class redis{
         double tt = Math.acos(t1 + t2 + t3);  
   
         System.out.println("两点间的距离：" + 6366000 * tt + " 米");  
-        return 6366000 * tt;  
+        return 6371000 * tt;  
     }
+	
 	
 	public static void main(String []args){
 		for(int i=0;i<level.length;i++){

@@ -34,15 +34,34 @@
 					]
 	}); 
 	
+	var zoomTimer=null;
+	var dragendTimer=null;
+	
 	map.addEventListener("zoomend", function(){  //缩放后的级别  
-		getData(map,this.getZoom(),map.getCenter(),map.getBounds());//发送请求到服务器，当前地图层级，当前中心点	
-	    console.log("zoomed:" + this.getZoom() + "");    
-	    var center = map.getCenter();    
-	    console.log("center:" + center.lng + ", " + center.lat);   
+		
+		if(zoomTimer){
+			clearTimeout(zoomTimer);
+		}
+		zoomTimer=setTimeout(function(){
+			getData(map,map.getZoom(),map.getCenter(),map.getBounds());//发送请求到服务器，当前地图层级，当前中心点	
+			console.log("zoomed:" + map.getZoom() + "");    
+			var center = map.getCenter();    
+			console.log("center:" + center.lng + ", " + center.lat);  
+		},1000);
 	});
-	map.addEventListener("dragend", function(){ //拖拽事件中心点为  
-		getData(map,this.getZoom(),map.getCenter(),map.getBounds());//发送请求到服务器，当前地图层级，当前中心点	
-	    console.log("dragend:" + this.getZoom() + "");    
-	    var center = map.getCenter();    
-	    console.log("center:" + center.lng + ", " + center.lat);   
+	
+	map.addEventListener("dragend", function(){ //拖拽事件中心点为 
+		
+		
+		if(dragendTimer){
+			clearTimeout(dragendTimer);
+		}
+		dragendTimer=setTimeout(function(){
+			//console.log("#");
+			getData(map,map.getZoom(),map.getCenter(),map.getBounds());//发送请求到服务器，当前地图层级，当前中心点	
+			console.log("dragend:" + map.getZoom() + "");    
+			var center = map.getCenter();    
+			console.log("center:" + center.lng + ", " + center.lat);  
+		},1000);
 	});
+
