@@ -18,7 +18,7 @@ public class data_to_redis {
 		jedis=new Jedis("localhost",6379);
 		jedis.auth("123456");
 		jedis.select(0);
-		System.out.println("Redis服务器正在运行"+jedis.ping());
+		//System.out.println("Redis服务器正在运行"+jedis.ping());
 
 	}
 	public static data_to_redis getInstance(){
@@ -33,6 +33,7 @@ public class data_to_redis {
 		String name;
 		//System.out.println(list.size());
 		String key_1="iov_test_"+index+":";
+		if(list==null)return;
         for(int i=0;i<list.size();i++){
         	String key=key_1;
         	Map<String,String> map=new HashMap<String,String>();

@@ -12,10 +12,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--meta name="viewport" content="initial-scale=1.0, user-scalable=no" /-->  
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
 <title>百度地图展示</title>  
-<style type="text/css">  
+<style type="text/css">
+*{
+	margin:0;
+	padding:0;
+}  
 html{height:100%}  
-body{width:100%;height:100%;margin:0px auto;padding:0px}  
-#container{height:95%}  
+body{
+	width:100%;
+	height:100%;
+	margin:auto;
+	
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}  
+#container{
+	height:95%;
+	
+} 
+#button{
+	height:5%;
+} 
 </style>  
 
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=BMgnVpFhGSH7GE8l7qnWhESkeCr12n9v"></script>
@@ -23,19 +43,20 @@ body{width:100%;height:100%;margin:0px auto;padding:0px}
 </head>  
  
 <body>  
-<div id="container"></div> 
+
 <div id="button">
-<button id='t1'>30s</button> 
-<button id='t2'>60s</button> 
-<button id='t3'>暂停</button>
+	<button id='t1'>30s</button> 
+	<button id='t2'>60s</button> 
+	<button id='t3'>暂停</button>
+	
+	<button id='num1'>1000</button> 
+	<button id='num2'>1500</button> 
+	<button id='num3'>2000</button>  
 
-<button id='num1'>1000</button> 
-<button id='num2'>1500</button> 
-<button id='num3'>2000</button>  
 
-
-<button id='test'>test</button>  
+<!-- button id='test'>test</button>   -->
 </div>
+<div id="container"></div> 
 </body>
 
  

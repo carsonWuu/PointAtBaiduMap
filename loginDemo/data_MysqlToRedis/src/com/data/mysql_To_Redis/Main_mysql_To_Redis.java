@@ -14,26 +14,36 @@ import com.tonetime.commons.database.helper.DbHelper;
 import com.tonetime.commons.database.helper.JdbcCallback;
 
 public class Main_mysql_To_Redis {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+		new mysqlReader(0).run();
+		while(true){
 		System.out.println("开始查询：！");
 		long start = System.currentTimeMillis(); //程序开始记录时间
 		
-		 ExecutorService exec = Executors.newFixedThreadPool(24);
-         for (int i = 0; i < 100; i++) {
-             exec.execute(new mysqlReader(i));
-             
-         }
-         exec.shutdown();
+		ExecutorService exec = Executors.newFixedThreadPool(40);
 		
-         while(true){
+		for (int i = 0; i < 100; i++) {
+			exec.execute(new mysqlReader(i));
+			// new mysqlReader(i).run();
+             
+        }
+			 
+		 
+        exec.shutdown();
+		
+         
+        while(true){
              if(exec.isTerminated()){
                  //System.out.println("Finally do something ");
                  long end = System.currentTimeMillis();
                  System.out.println("用时: " + (end - start) + "ms");
+                 Thread.sleep(5000);
                  break;
              }
 
          }
+       break; 
+		}
 		
 	}
 }

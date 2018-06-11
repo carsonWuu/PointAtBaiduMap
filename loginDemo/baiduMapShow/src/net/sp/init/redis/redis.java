@@ -4,12 +4,11 @@ import java.util.*;
 
 import redis.clients.jedis.Jedis;
 import net.sp.programme.data.mapPosition;
+import net.sp.GPS.GPSUtil;
 
 public class redis{
 	public static int[] level={2000000,1000000,500000,200000,100000,50000,25000,20000,10000,5000,2000,1000,500,200,100,50,20,10,5,2};//比例尺距离(米)
-	private static final Double PI = Math.PI;  
-	  
-    private static final Double PK = 180 / PI;  
+	 
     
 	public redis(){
 		super();
@@ -43,19 +42,44 @@ public class redis{
 			map=jedis.hgetAll(key);
 			Iterator iterator = map.keySet().iterator();
 			String lng="",lat="";
+			String templng="",templat="";
 	    	while (iterator.hasNext()){
 	    	   String k = (String) iterator.next();
 	    	   if(k.equals("n_clng")){
 	    		   lng= map.get(k).toString();
+	    		  
 	    	   }
-	    	   if(k.equals("n_clat")){
+	    	   else if(k.equals("n_clat")){
 	    		   lat= map.get(k).toString();
 	    	   }
+	    	   else if(k.equals("n_lng")){
+	    		   templng= map.get(k).toString();
+	    		  
+	    	   }
+	    	   else if(k.equals("n_lat")){
+	    		   templat= map.get(k).toString();
+	    	   }
 	    	   
-	    	   if(lng!=""&&lat!="")break;     
+//	    	   if(lng==null||lat==null||lng==""||lat==""){//需由WGS84坐标系转换为BD09坐标
+//	    		   
+//	    		   break;     
+//	    	   }
+	    	}
+	    	double lng_a=Double.parseDouble(templng),lat_a=Double.parseDouble(templat);
+	    	if(lng==null||lat==null||lng==""||lat==""){//需由WGS84坐标系转换为BD09坐标
+	    		lng=templng;
+	    		lat=templat;
+	    		
+	    		
+	    		lng_a=Double.parseDouble(lng);
+	    		lat_a=Double.parseDouble(lat);
+	    		
+	    		double temp[]=GPSUtil.gps84_To_bd09(lat_a, lng_a);
+	    		lat_a=temp[0];
+	    		lng_a=temp[1];
 	    	}
 			
-	    	double lng_a=Double.parseDouble(lng),lat_a=Double.parseDouble(lat);
+	    	
 			if(checkData(m,lng_a,lat_a))list.add(map);
 		}
 		return list; 
@@ -86,16 +110,7 @@ public class redis{
 		return false;
 	}
 	
-	public static double getDistanceFromTwoPoints(double lat_a, double lng_a, double lat_b, double lng_b) {  
-        double t1 = Math.cos(lat_a / PK) * Math.cos(lng_a / PK) * Math.cos(lat_b / PK) * Math.cos(lng_b / PK);  
-        double t2 = Math.cos(lat_a / PK) * Math.sin(lng_a / PK) * Math.cos(lat_b / PK) * Math.sin(lng_b / PK);  
-        double t3 = Math.sin(lat_a / PK) * Math.sin(lat_b / PK);  
-  
-        double tt = Math.acos(t1 + t2 + t3);  
-  
-        System.out.println("两点间的距离：" + 6366000 * tt + " 米");  
-        return 6371000 * tt;  
-    }
+	
 	
 	
 	public static void main(String []args){
