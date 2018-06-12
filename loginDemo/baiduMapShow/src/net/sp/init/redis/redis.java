@@ -21,7 +21,10 @@ public class redis{
 		Iterator it=keys.iterator();
 		Map map=new HashMap<String,String>();
 		List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+		int i=0;//只统计3000个
 		while(it.hasNext()){
+			if(i==3000)break;
+			i++;
 			String key=it.next().toString();
 			map=jedis.hgetAll(key);
 			list.add(map);
@@ -37,7 +40,10 @@ public class redis{
 		Iterator it=keys.iterator();
 		Map map=new HashMap<String,String>();
 		List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+		int i=0;
 		while(it.hasNext()){
+			if(i==3000)break;
+			i++;
 			String key=it.next().toString();
 			map=jedis.hgetAll(key);
 			Iterator iterator = map.keySet().iterator();
@@ -74,7 +80,7 @@ public class redis{
 	    		lng_a=Double.parseDouble(lng);
 	    		lat_a=Double.parseDouble(lat);
 	    		
-	    		double temp[]=GPSUtil.gps84_To_bd09(lat_a, lng_a);
+	    		double temp[]=GPSUtil.gps84_To_bd09(lat_a, lng_a);//转换
 	    		lat_a=temp[0];
 	    		lng_a=temp[1];
 	    	}
