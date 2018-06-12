@@ -1,4 +1,4 @@
-package com.data.mysql_To_Redis;
+package com.data.To_Redis;
 
 import java.util.HashMap;
 import java.util.Iterator;

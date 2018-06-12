@@ -1,4 +1,4 @@
-package com.data.mysql_To_Redis;
+package com.data.Main_mysqlToRedis;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,14 +10,15 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.data.from_Mysql.mysqlReader;
 import com.tonetime.commons.database.helper.DbHelper;
 import com.tonetime.commons.database.helper.JdbcCallback;
 
-public class Main_mysql_To_Redis {
+public class Main_mysqlToRedis {
 	public static void main(String[] args) throws InterruptedException {
 		new mysqlReader(0).run();
 		while(true){
-			System.out.println("开始查询：！");
+			System.out.println("开始查询！");
 			long start = System.currentTimeMillis(); //程序开始记录时间
 			
 			ExecutorService exec = Executors.newFixedThreadPool(100);
@@ -41,6 +42,7 @@ public class Main_mysql_To_Redis {
 	                 //System.out.println("Finally do something ");
 	                 long end = System.currentTimeMillis();
 	                 System.out.println("用时: " + (end - start) + "ms");
+	                 System.out.println("Sleep 30 Second!");
 	                 Thread.sleep(30000);
 	                 break;
 	             }
