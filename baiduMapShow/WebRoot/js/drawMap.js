@@ -6,7 +6,7 @@ function draw(map,data){
 	map.clearOverlays();
 	var array = new Array();
 	
-	var max=num<data.length?num:data.length;//根据用户选择，500/1000/1500/2000
+	var max=num<data.length?num:data.length;//根据用户选择，1000/1500/2000
 	
 	for(var i=0;i<max;i++){
 		var point;

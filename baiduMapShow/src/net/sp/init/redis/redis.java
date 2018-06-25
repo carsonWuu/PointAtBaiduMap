@@ -24,9 +24,9 @@ public class redis{
 		Iterator it=keys.iterator();
 		Map map=new HashMap<String,String>();
 		List<Map<String,String>> list=new ArrayList<Map<String,String>>();
-		int i=0;//只统计3000个
+		int i=0;//只统计1000个
 		while(it.hasNext()){
-			if(i==3000)break;
+			if(i==1000)break;
 			i++;
 			String key=it.next().toString();
 			map=jedis.hgetAll(key);
@@ -48,8 +48,8 @@ public class redis{
 		List<Map<String,String>> list=new ArrayList<Map<String,String>>();
 		int i=0;
 		while(it.hasNext()){
-			if(i==3000)break;
-			i++;
+			if(i==m.number)break;
+			
 			String key=it.next().toString();
 			map=jedis.hgetAll(key);
 			Iterator iterator = map.keySet().iterator();
@@ -92,7 +92,10 @@ public class redis{
 	    	}
 			
 	    	
-			if(checkData(m,lng_a,lat_a))list.add(map);//在m的矩形内，则需要进行展示，list.add
+			if(checkData(m,lng_a,lat_a)){
+				i++;
+				list.add(map);//在m的矩形内，则需要进行展示，list.add
+			}
 		}
 		return list; 
 	}

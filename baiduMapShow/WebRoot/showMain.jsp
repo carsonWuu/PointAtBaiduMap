@@ -83,7 +83,7 @@ body{
 <script>
 $(document).ready(function(){
 	//show 500 Point
-	window.num=500;
+	window.num=1000;
 	$.ajax({
             type: "post",
             url: 'getMap',

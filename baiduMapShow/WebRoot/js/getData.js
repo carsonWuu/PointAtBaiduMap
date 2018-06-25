@@ -13,7 +13,7 @@ function getData(map,zoom,center,bounds){
 			
 			bounds_rightTop_x:bounds.getNorthEast().lng,
 			bounds_rightTop_y:bounds.getNorthEast().lat,
-		
+			number : num,
 			
 	}
 	$.ajax({
