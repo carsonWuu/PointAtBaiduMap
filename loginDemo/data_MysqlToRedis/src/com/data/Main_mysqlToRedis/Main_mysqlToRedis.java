@@ -42,8 +42,8 @@ public class Main_mysqlToRedis {
 	                 //System.out.println("Finally do something ");
 	                 long end = System.currentTimeMillis();
 	                 System.out.println("”√ ±: " + (end - start) + "ms");
-	                 System.out.println("Sleep 30 Second!");
-	                 Thread.sleep(30000);
+	                 System.out.println("Sleep 5 minutes!");
+	                 Thread.sleep(300000);
 	                 break;
 	             }
 	

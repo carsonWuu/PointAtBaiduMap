@@ -60,7 +60,7 @@ public class mysqlReader implements Runnable{
 	            List list1=connect(c_imei);
 	            data_to_redis.getInstance().to_Redis(index, list1);//将list数据存入redis缓存中
 	        }
-	       // System.out.println(list.size());
+	        System.out.println("iov_track_"+index+": has finished!");
 	        long end = System.currentTimeMillis();
 	       // System.out.println(index+"--------:"+(end - start) + "ms");	
 			
@@ -95,25 +95,8 @@ public class mysqlReader implements Runnable{
 		});
 		return list;
 	}
-	
-	
-	
-	
-	
-	
-	
-	public static void main(String[] args){
-		System.out.println(Runtime.getRuntime().availableProcessors());
-		System.out.println("开始查询：！");
-		long start = System.currentTimeMillis(); //程序开始记录时间
-       
-		mysqlReader m=new mysqlReader(0);
-		m.run();
 		
-		long end = System.currentTimeMillis();
-        System.out.println("用时: " + (end - start) + "ms");
-		
-	}
+	
 
 }
 
