@@ -1,12 +1,12 @@
 /*
- * 使用获得的data作图。
+ * 鍦板浘
  */
 function draw(map,data){
 	
 	map.clearOverlays();
 	var array = new Array();
 	
-	var max=num<data.length?num:data.length;//根据用户选择，1000/1500/2000
+	var max=num<data.length?num:data.length;//灞曠ず涓暟1000/1500/2000
 	
 	for(var i=0;i<max;i++){
 		var point;
@@ -35,14 +35,14 @@ function draw(map,data){
 	 var pointCollection=new BMap.PointCollection(array,options);
 
 
-	 pointCollection.addEventListener('click', function(e) {// 监听点击事件
+	 pointCollection.addEventListener('click', function(e) {// 
 		console.log(e);
 		var point1 = new BMap.Point(e.point.lng, e.point.lat);
 		var opts = {
-			width: 80,     // 信息窗口宽度
-			height: 60,     // 信息窗口高度
-			title: "Info", // 信息窗口标题
-			enableMessage: false//设置允许信息窗发送短息
+			width: 80,    
+			height: 60,     
+			title: "Info",
+			enableMessage: false
 		};
 		var infowindow = new BMap.InfoWindow(e.point.lng + ',' + e.point.lat+' \n '+e.point.c_model, opts);
 		map.openInfoWindow(infowindow, point1);

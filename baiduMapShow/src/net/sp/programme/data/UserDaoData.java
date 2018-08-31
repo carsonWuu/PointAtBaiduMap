@@ -34,12 +34,12 @@ import net.sp.Position.mapPosition;
 public class UserDaoData extends HttpServlet {
 
 	/*
-	 * Ã¿Ò»´ÎÓÃ»§µÄ²Ù×÷ÇëÇó£¬dataÎªÓÃ»§µ±Ç°×ø±êĞÅÏ¢¡£
+	 * 
 	 *  
 	 *  */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("ÇëÇóÊı¾İ:");
+		System.out.println("æ¥æ”¶:");
 		request.setCharacterEncoding("utf-8");  
         //response.setContentType("text/html;charset=utf-8");  
 		String param=request.getParameter("data"); 
@@ -61,8 +61,9 @@ public class UserDaoData extends HttpServlet {
 	        
 	    Gson gson = new Gson();
 	    out.println(gson.toJson(list));
-	        
-	    System.out.println("Êı¾İ·¢ËÍÍê±Ï£¡");
+	    out.flush();
+		out.close();    
+	    System.out.println("å‘é€æˆåŠŸ");
 	}
 
 	

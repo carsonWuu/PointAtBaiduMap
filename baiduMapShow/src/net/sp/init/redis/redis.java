@@ -1,30 +1,45 @@
 package net.sp.init.redis;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import redis.clients.jedis.Jedis;
 import net.sp.Position.mapPosition;
 import net.sp.GPS.GPSUtil;
 
+/**
+ * redisæ•°æ®æŸ¥è¯¢ç±»
+ */
 public class redis{
-	public static int[] level={2000000,1000000,500000,200000,100000,50000,25000,20000,10000,5000,2000,1000,500,200,100,50,20,10,5,2};//±ÈÀı³ß¾àÀë(Ã×)
-	 
-    
+	public Jedis jedis;
+	
+    private static redis instance = null;
 	public redis(){
-		super();
-	}
-	public static List init_from_Redis(){
-		/*
-		 * ÓÃ»§³õÊ¼Õ¹Ê¾£¬´ÓredisÖĞ²éÕÒÊı¾İ¡£
-		 */
-		Jedis jedis=new Jedis("localhost",6379);
+		
+		jedis=new Jedis("localhost",6379);
 		jedis.auth("123456");
 		jedis.select(0);
+		
+	}
+	
+	public static redis getInstance(){
+		if(instance == null){
+			instance = new redis();
+		}
+		return instance;
+	}
+	/**
+	 * åˆå§‹åŒ–æŸ¥è¯¢
+	 */
+	public  List init_from_Redis(){
+		
 		Set keys=jedis.keys("*");
 		Iterator it=keys.iterator();
 		Map map=new HashMap<String,String>();
 		List<Map<String,String>> list=new ArrayList<Map<String,String>>();
-		int i=0;//Ö»Í³¼Æ1000¸ö
+		int i=0;//Ö»Í³ï¿½ï¿½1000ï¿½ï¿½
 		while(it.hasNext()){
 			if(i==1000)break;
 			i++;
@@ -35,13 +50,13 @@ public class redis{
 		return list; 
 	}
 	
-	/*
-	 * ±éÀúËùÓĞµÄredis£¬½«ÔÚmapPosition¾ØĞÎÄÚµÄËùÓĞ×ø±êÈ¡³öÀ´¡£
+	/**
+	 * ç”¨æˆ·æ“ä½œåæŸ¥è¯¢
+	 * @param mapPositionï¼ˆå½“å‰åœ°å›¾ä¿¡æ¯ï¼‰
+	 * 
 	 */
-	public static List data_from_Redis(mapPosition m){
-		Jedis jedis=new Jedis("localhost",6379);
-		jedis.auth("123456");
-		jedis.select(0);
+	public  List data_from_Redis(mapPosition m){
+		
 		Set keys=jedis.keys("*");
 		Iterator it=keys.iterator();
 		Map map=new HashMap<String,String>();
@@ -72,13 +87,10 @@ public class redis{
 	    		   templat= map.get(k).toString();
 	    	   }
 	    	   
-//	    	   if(lng==null||lat==null||lng==""||lat==""){//ĞèÓÉWGS84×ø±êÏµ×ª»»ÎªBD09×ø±ê
-//	    		   
-//	    		   break;     
-//	    	   }
+
 	    	}
 	    	double lng_a=Double.parseDouble(templng),lat_a=Double.parseDouble(templat);
-	    	if(lng==null||lat==null||lng==""||lat==""){//Èç¹ûn_lng»òn_latÎª¿Õ£¬ÔòĞèÒª½øĞĞ×ø±ê×ª»»£¬ĞèÓÉWGS84×ø±êÏµ×ª»»ÎªBD09×ø±ê
+	    	if(lng==null||lat==null||lng==""||lat==""){//éœ€è¦è¿›è¡Œè½¬æ¢
 	    		lng=templng;
 	    		lat=templat;
 	    		
@@ -86,42 +98,32 @@ public class redis{
 	    		lng_a=Double.parseDouble(lng);
 	    		lat_a=Double.parseDouble(lat);
 	    		
-	    		double temp[]=GPSUtil.gps84_To_bd09(lat_a, lng_a);//×ª»»
+	    		double temp[]=GPSUtil.gps84_To_bd09(lat_a, lng_a);//×ªï¿½ï¿½
 	    		lat_a=temp[0];
 	    		lng_a=temp[1];
 	    	}
 			
 	    	
-			if(checkData(m,lng_a,lat_a)){
+			if(checkData(m,lng_a,lat_a)){//è¯¥gpsåœ¨ç•Œé¢å†…
 				i++;
-				list.add(map);//ÔÚmµÄ¾ØĞÎÄÚ£¬ÔòĞèÒª½øĞĞÕ¹Ê¾£¬list.add
+				list.add(map);
 			}
 		}
 		return list; 
 	}
-	/*
-	 * ÅĞ¶Ïµ±Ç°×ø±êÊÇ·ñÔÚÓÃ»§ÆÁÄ»¾ØĞÎÄÚ¡£¾ØĞÎ´æ´¢ÔÚmapPositionÄÚ¡£
+	
+	/**åˆ¤æ–­è¯¥gpsç‚¹åœ¨å¯è§†ç•Œé¢å†…
+	 * 
 	 */
 	public static boolean checkData(mapPosition m,double a,double b){
 		
-		double lng_a=m.index_x,lat_a=m.index_y;//¾­Î³¶È
+		double lng_a=m.index_x,lat_a=m.index_y;//ï¿½ï¿½Î³ï¿½ï¿½
 		
 		double ld_lng=m.bounds_leftDown_x,ld_lat=m.bounds_leftDown_y;
 		double rt_lng=m.bounds_rightTop_x,rt_lat=m.bounds_rightTop_y;
 		
 		if((a>ld_lng)&&(a<rt_lng)&&(b>ld_lat)&&(b<rt_lat))return true;
-//		int zoom=m.zoom;//level
-//		int num=6;
-//		double miles=num*level[zoom-3];
-		
-		//checked Point
-		
-        
-//		if(getDistanceFromTwoPoints(lat_a, lng_a, a, b)<miles)return true;//¾àÀëÅĞ¶Ï
-		
-		/*ÆÁÄ»ÄÚ¶Ô½ÇÏß¾­Î³¶ÈÖ±½Ó½øĞĞ±È½Ï¡£
-		 * 
-		 */
+
 		
 		
 		
@@ -129,12 +131,45 @@ public class redis{
 	}
 	
 	
+	public int onlineNum_from_Redis(){
+		Set keys=jedis.keys("*");
+		Iterator it=keys.iterator();
+		Map map=new HashMap<String,String>();
+		List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+		int i=0;//
+		Date currentTime = new Date();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		
+		while(it.hasNext()){
+			
+			
+			String key=it.next().toString();
+			String dataTime=jedis.hgetAll(key).get("t_data_time");
+			try {
+				Date t = df.parse(dataTime);
+				int d= 300*1000;
+				if(Math.abs(t.getTime()-currentTime.getTime())<=d) {
+					i++;//åœ¨çº¿
+					System.out.println(t.getTime());
+					System.out.println(currentTime.getTime());
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+//			System.out.println(dataTime);
+//			list.add(map);
+		}
+		return i; 
 	
+	}
 	
 	public static void main(String []args){
-		for(int i=0;i<level.length;i++){
-			System.out.print(level[level.length-1-i]+",");
+		for(int i =0;i<2;i++){
+			redis re= redis.getInstance();
+			re.init_from_Redis();
 		}
-		System.out.println(redis.init_from_Redis().size());
+//		System.out.println(redis.init_from_Redis().size());
 	}
 }

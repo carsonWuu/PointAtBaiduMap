@@ -1,6 +1,6 @@
-/*ÖÜÆÚË¢ĞÂÊı¾İ
- * Ê±¼ä¼ä¸ôÄ¬ÈÏ£º30s
- * ¿ÉÑ¡£º30s/60s
+/*è‡ªåŠ¨åˆ·æ–°æ—¶é—´é—´éš”
+ * é»˜è®¤30s
+ * å¯é€‰30s/60s
  */
 
 var timer=30000;
@@ -11,8 +11,8 @@ var t=setInterval(change,timer);
 function change(){
 	//change baiduMap
 	//method:draw(map,data)
-	getData(map,map.getZoom(),map.getCenter(),map.getBounds());//·¢ËÍÇëÇóµ½·şÎñÆ÷£¬µ±Ç°µØÍ¼²ã¼¶£¬µ±Ç°ÖĞĞÄµã	
-	
+	getData(map,map.getZoom(),map.getCenter(),map.getBounds());//è·å–å½“å‰è®¾å¤‡GPSä½ç½®
+	getOnlineNum();//è·å¾—å½“å‰åœ¨çº¿æ•°
 	$('#t1').click(function(){
 		timer=30000;
 		clearInterval(t);

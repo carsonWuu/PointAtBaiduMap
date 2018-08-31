@@ -30,14 +30,20 @@
     <servlet-name>getMap</servlet-name>
     <servlet-class>net.sp.init.map.setMap</servlet-class>
   </servlet>
-  
-
   <servlet-mapping>
     <servlet-name>getMap</servlet-name>
     <url-pattern>/getMap</url-pattern>
   </servlet-mapping>
  
-
+ <servlet>
+    <servlet-name>getOnlineNum</servlet-name>
+    <servlet-class>net.sp.programme.onlineNum.OnlineNum</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getOnlineNum</servlet-name>
+    <url-pattern>/getOnlineNum</url-pattern>
+  </servlet-mapping>
+ 
  
   
   

@@ -20,11 +20,13 @@ import com.tonetime.commons.database.helper.DbHelper;
 import com.tonetime.commons.database.helper.JdbcCallback;
 
 
-
+/**
+ * ä»redisæ•°æ®åº“æŸ¥è¯¢æ•°æ®
+ */
 public class UserDaoImpl{
 	
-	/*
-	 * unÎªÓÃ»§Ãû£¬pwÃÜÂë£¬ÅĞ¶ÏÓÃ»§ÊÇ·ñµÇÂ¼
+	/**
+	 * ç™»é™†éªŒè¯
 	 */
 	public  static List checkLogin(final String un,final String pw) throws Exception{
 			
@@ -42,40 +44,34 @@ public class UserDaoImpl{
 			
 	}
 	
-	/*
-	 * Ò³Ãæ´ò¿ªÊ±Êı¾İµÄ³õÊ¼Õ¹Ê¾¡£
+	/**
+	 * ç”¨æˆ·åˆšç™»é™†åˆå§‹åŒ–æŸ¥è¯¢æ•°æ®
 	 */
 	public  static List initOutputData() throws Exception{
-		System.out.println("³õÊ¼»¯²éÑ¯£¡");
-		long startTime = System.currentTimeMillis(); //³ÌĞò¿ªÊ¼¼ÇÂ¼Ê±¼ä
-		List list=redis.init_from_Redis();
-		long endTime   = System.currentTimeMillis(); //³ÌĞò½áÊø¼ÇÂ¼Ê±¼ä
-		long TotalTime = endTime - startTime;       //×ÜÏûºÄÊ±¼ä
-		System.out.println("³õÊ¼»¯²éÑ¯Ê±¼ä(ms):"+TotalTime);
+		System.out.println("åˆå§‹åŒ–");
+		long startTime = System.currentTimeMillis(); 
+		List list=new redis().init_from_Redis();
+		long endTime   = System.currentTimeMillis(); 
+		long TotalTime = endTime - startTime;       
+		System.out.println("åˆå§‹åŒ–(ms):"+TotalTime);
 		return list;
 		
 	}
 	
-	/*
-	 * È¡³öÔÚÓÃ»§½çÃæÄÚ¿ÉÒÔÕ¹Ê¾µÄ×ø±ê
+	/**
+	 * ç”¨æˆ·æ“ä½œåæŸ¥è¯¢æ•°æ®
 	 */
 	public  static List outputData(mapPosition map) throws Exception{
-		long startTime = System.currentTimeMillis(); //³ÌĞò¿ªÊ¼¼ÇÂ¼Ê±¼ä
-		//¡£¡£¡£ ¡£¡£¡£
+		long startTime = System.currentTimeMillis(); 
+		//
 		
-		double lon=map.index_x,lat=map.index_y;//¾­Î³¶È
+		double lon=map.index_x,lat=map.index_y;//ç»çº¬åº¦
 		int zoom=map.zoom;//level
-		List list=redis.data_from_Redis(map);
-				
-			
-//				final String sqlCom="SELECT n_clng,n_clat,c_model,(6371 * acos (cos ( radians("+lon+") )* cos( radians( n_clat ) )* cos( radians( n_clng ) - radians("+lat+") )+ sin ( radians("+lon+") )    * sin( radians( n_clat ) )    )     ) AS distance    FROM iov_track_0  HAVING distance < "+distance+"  ORDER BY distance;";
-//				System.out.println(sqlCom);						
-				
-		
-			
-		long endTime   = System.currentTimeMillis(); //³ÌĞò½áÊø¼ÇÂ¼Ê±¼ä
-		long TotalTime = endTime - startTime;       //×ÜÏûºÄÊ±¼ä
-		System.out.println("ÓÃ»§²éÑ¯Ê±¼ä(ms):"+TotalTime);
+		List list=new redis().data_from_Redis(map);
+					
+		long endTime   = System.currentTimeMillis(); 
+		long TotalTime = endTime - startTime;       
+		System.out.println("è€—æ—¶(ms):"+TotalTime);
 		return list;
 			
 	}
