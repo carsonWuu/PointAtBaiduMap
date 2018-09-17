@@ -67,4 +67,11 @@
 			console.log("center:" + center.lng + ", " + center.lat);  
 		},1000);
 	});
+	
+//	changeMapStyle('midnight')
+//	sel.value = 'midnight';
 
+	function changeMapStyle(style){
+		map.setMapStyle({style:style});
+//		$('#desc').html(mapstyles[style].desc);
+	}

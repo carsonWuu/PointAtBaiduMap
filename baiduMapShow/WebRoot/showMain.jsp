@@ -74,8 +74,11 @@ body{
 </div>
 <div >
 	<p id="onlineNum">
-		<b class="onlineNum">在线人数：</b>
-		<b id="olNum">10000</b>
+		<b class="onlineNum">在线数：</b>
+		<b id="olNum">0000</b>
+		
+		<b class="onlineNum">设备数：</b>
+		<b id="Num">0000</b>
 	</p>
 	
 
@@ -106,7 +109,7 @@ function loadJScript() {
 }
 function init(){
 	//show 500 Point
-	window.num=1000;
+	window.num=900;
 	$.ajax({//gps数据点
             type: "post",
             url: 'getMap',

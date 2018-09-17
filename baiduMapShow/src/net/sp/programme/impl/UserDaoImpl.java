@@ -48,7 +48,6 @@ public class UserDaoImpl{
 	 * 用户刚登陆初始化查询数据
 	 */
 	public  static List initOutputData() throws Exception{
-		System.out.println("初始化");
 		long startTime = System.currentTimeMillis(); 
 		List list=new redis().init_from_Redis();
 		long endTime   = System.currentTimeMillis(); 
@@ -66,7 +65,7 @@ public class UserDaoImpl{
 		//
 		
 		double lon=map.index_x,lat=map.index_y;//经纬度
-		int zoom=map.zoom;//level
+		
 		List list=new redis().data_from_Redis(map);
 					
 		long endTime   = System.currentTimeMillis(); 

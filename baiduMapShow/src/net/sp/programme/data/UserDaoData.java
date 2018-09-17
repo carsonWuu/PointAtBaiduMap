@@ -39,7 +39,7 @@ public class UserDaoData extends HttpServlet {
 	 *  */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("接收:");
+		System.out.print("接收:");
 		request.setCharacterEncoding("utf-8");  
         //response.setContentType("text/html;charset=utf-8");  
 		String param=request.getParameter("data"); 
@@ -63,7 +63,7 @@ public class UserDaoData extends HttpServlet {
 	    out.println(gson.toJson(list));
 	    out.flush();
 		out.close();    
-	    System.out.println("发送成功");
+	   
 	}
 
 	

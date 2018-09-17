@@ -1,5 +1,5 @@
 /**
- * »ñÈ¡ºóÌ¨Êı¾İ
+ * ï¿½ï¿½È¡ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½
  */
 function getData(map,zoom,center,bounds){
 	var currentIndex={
@@ -19,10 +19,10 @@ function getData(map,zoom,center,bounds){
 	$.ajax({
         type: "get",
         url: 'getData',
-        contentType:"application/x-www-form-urlencoded",  //Ä¬ÈÏµÄ·¢ËÍµÄ±àÂë¸ñÊ½
+        contentType:"application/x-www-form-urlencoded",  //è¯·æ±‚å†…å®¹ç±»å‹
         data: {data:JSON.stringify(currentIndex)},
         
-        //dataType:'application/json',//½ÓÊÕ·şÎñÆ÷µÄ±àÂë¸ñÊ½
+        //dataType:'application/json',//æ¥æ”¶å†…å®¹ç±»å‹
         cache: true,
         async: true,
         success: function(data){

@@ -1,6 +1,6 @@
 
 $('#num1').click(function(){
-	num=1000;
+	num=100;
 	getData(map,map.getZoom(),map.getCenter(),map.getBounds());//1000
 });
 $('#num2').click(function(){

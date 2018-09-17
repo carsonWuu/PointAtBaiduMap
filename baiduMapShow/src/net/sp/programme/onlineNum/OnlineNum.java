@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import net.sp.init.redis.redis;
+import net.sp.olnum.OlNum;
 
 public class OnlineNum extends HttpServlet {
 
@@ -42,8 +45,12 @@ public class OnlineNum extends HttpServlet {
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		int data = new redis().onlineNum_from_Redis();
-		out.println(data);
+		
+		
+		int[] data = new redis().getOnlineNum();
+		OlNum olnum = new OlNum(data[0],data[1]);
+		Gson gson = new Gson();
+		out.println(gson.toJson(olnum));
 		
 		out.flush();
 		out.close();

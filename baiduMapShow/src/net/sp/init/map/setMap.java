@@ -63,9 +63,9 @@ public class setMap extends HttpServlet {
 		   
 		        
 		    Gson gson = new Gson();
+		    System.out.println(list.size());
 		    out.println(gson.toJson(list));
-		        
-		    System.out.println("发送成功");
+		 
 
 	}
 	

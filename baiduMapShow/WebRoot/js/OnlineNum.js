@@ -10,10 +10,11 @@ function getOnlineNum(){
         cache: true,
         async: true,
         success: function(data){
-            //alert(data);
-            var arraydata = eval(data);  
+//            console.log(data);
+//            var arraydata = eval(data); 
+            var obj=JSON.parse(data);
 //            console.log(arraydata.length); 
-            OnlineSrc(data);
+            OnlineSrc(obj);
         },
         error:function(error){
         	console.log(error);
@@ -24,6 +25,7 @@ function getOnlineNum(){
 
 function  OnlineSrc(data){
 //	data = 2;
-	document.getElementById("olNum").innerHTML=data;
+	document.getElementById("olNum").innerHTML=data.olNum;
+	document.getElementById("Num").innerHTML=data.Num;
 	
 }
