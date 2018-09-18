@@ -1,5 +1,5 @@
-/**
- * ��ȡ��̨���
+/**请求数据
+ * 
  */
 function getData(map,zoom,center,bounds){
 	var currentIndex={

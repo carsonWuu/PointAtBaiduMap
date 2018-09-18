@@ -110,11 +110,14 @@ function loadJScript() {
 function init(){
 	//show 500 Point
 	window.num=900;
+	var reqData = {
+		number : num,	
+	}
 	$.ajax({//gps数据点
             type: "post",
             url: 'getMap',
             contentType:"application/x-www-form-urlencoded",  //默认的发送的编码格式
-            data: '',
+            data: {data:JSON.stringify(reqData)},
             
             //dataType:'application/json',//接收服务器的编码格式
             cache: true,
@@ -131,7 +134,7 @@ function init(){
             
 	});
 	
-	getOnlineNum();
+	//getOnlineNum();
 };
 
 
