@@ -134,7 +134,7 @@ function init(){
             
 	});
 	
-	//getOnlineNum();
+	getOnlineNum();
 };
 
 
